@@ -18,7 +18,6 @@ bool Snake::Init() noexcept {
                     m_height / 2  + m_menu_height + m_padding - cell_width / 2,
                     Direction::UP});
     for (int i = 0; i < 3; ++i) {
-        // Move();
         Grow();
     }
     m_StateManager->Init();
@@ -30,23 +29,22 @@ void Snake::Grow() noexcept {
     int x = tail.x;
     int y = tail.y;
 
-    // switch (tail.direction) {
-    // case Direction::UP:
-    //     y -= cell_width;
-    //     break;
-    // case Direction::DOWN:
-    //     y += cell_width;
-    //     break;
-    // case Direction::LEFT:
-    //     x -= cell_width;
-    //     break;
-    // case Direction::RIGHT:
-    //     x += cell_width;
-    //     break;
-    // default:
-    //     break;
-    // }
-    Move();
+    switch (tail.direction) {
+    case Direction::UP:
+        y += cell_width;
+        break;
+    case Direction::DOWN:
+        y -= cell_width;
+        break;
+    case Direction::LEFT:
+        x += cell_width;
+        break;
+    case Direction::RIGHT:
+        x -= cell_width;
+        break;
+    default:
+        break;
+    }
 
     snake.push_back({createSprite("app/resources/body.png"),
                     x,
@@ -92,7 +90,7 @@ void Snake::onMouseButtonClick(FRMouseButton button, bool isReleased) noexcept {
 }
 
 void Snake::onKeyPressed(FRKey k) noexcept {
-
+    m_StateManager->HandleInput(k);
 }
 
 void Snake::onKeyReleased(FRKey k) noexcept {

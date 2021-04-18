@@ -10,7 +10,7 @@ public:
     ~GameState() {}
 
     virtual void Init() {}
-    virtual States HandleInput(FRKey k) override {}
+    virtual States HandleInput(FRKey k) override;
     virtual bool Tick() override;
 
 private:
