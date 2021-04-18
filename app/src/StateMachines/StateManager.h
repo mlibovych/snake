@@ -7,6 +7,9 @@ class StateManager {
 public:
     StateManager();
 
+    void Init() {
+        m_States[Menu]->Init();
+    }
     States HandleInput(FRKey k);
     bool Tick();
 

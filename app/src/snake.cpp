@@ -12,7 +12,7 @@ void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {
 }
 
 bool Snake::Init() noexcept {
-    
+    m_StateManager->Init();
     return true;
 }
 

@@ -22,6 +22,7 @@ class StateMachine {
 public:
     virtual ~StateMachine() {};
 
+    virtual void Init() = 0;
     virtual States HandleInput(FRKey k) = 0;
     virtual bool Tick() = 0;
 };

@@ -172,7 +172,7 @@ FRAMEWORK_API void showCursor(bool bShow)
 	SDL_ShowCursor(bShow?1:0);
 }
 
-FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color) {
+FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color, int *w, int *h) {
     TTF_Font* font = TTF_OpenFont("./Framework/fonts/font.ttf", font_size);
 
     if (!font) {
@@ -210,7 +210,7 @@ FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color
         std::terminate();
     }
 
-    if (TTF_SizeText(font, text, &sprite->w, &sprite->h)) {
+    if (TTF_SizeText(font, text, w, h)) {
         std::cerr << "Could not determine label texture size! Label will remain empty. Error: " 
                     << TTF_GetError() << std::endl;
         TTF_CloseFont(font);
@@ -220,6 +220,8 @@ FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color
     }
 
     sprite->tex = label_tex;
+    sprite->w = *w;
+    sprite->h = *h;
 
     SDL_FreeSurface(surfaceMessage);
     TTF_CloseFont(font);

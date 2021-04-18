@@ -38,7 +38,7 @@ FRAMEWORK_API void getScreenSize(int& w, int &h);
 
 FRAMEWORK_API void drawBGColor(Color color);
 FRAMEWORK_API void drawRect(int w, int h, int x, int y, Color color);
-FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color);
+FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color, int *w, int *h);
 
 // Get the number of milliseconds since library initialization.
 FRAMEWORK_API unsigned int getTickCount();

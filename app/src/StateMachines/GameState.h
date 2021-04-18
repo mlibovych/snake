@@ -6,6 +6,8 @@ class GameState: public StateMachine {
 public:
     GameState() {}
     ~GameState() {}
+
+    virtual void Init() {}
     virtual States HandleInput(FRKey k) override {}
     virtual bool Tick() override {
         drawBGColor({0,0,0});
@@ -18,7 +20,8 @@ public:
              10,
              {54,35,194});
         
-        drawSprite(generateTextTexture("Test", 24, {200, 10, 100}), 20, 30);
+        int w, h;
+        drawSprite(generateTextTexture("Test", 24, {200, 10, 100}, &w, &h), 20, 30);
 
         return false;
     }

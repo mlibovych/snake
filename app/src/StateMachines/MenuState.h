@@ -1,25 +1,47 @@
 #pragma once
 
-#include <array>
-
 #include "StateMachines/StateMachineBase.h"
+
+#include <string>
+#include <map>
 
 class Snake;
 // class StateMachine;
 
+const constexpr int g_menu_label_size = 36;
+const constexpr Color g_label_color = {50, 132, 0};
+const constexpr int g_top_padding = 50, g_side_padding = 100;
+const constexpr int g_text_padding = 10;
+
+enum e_Buttons {
+    StartButton,
+    ScoreButton,
+    ExitButton,
+    CountButton
+};
+
 struct Button {
+    int texture_w, texture_h;
     Sprite *m_texture;
-    Rect *button_rect;
+    Rect button_rect;
 };
 
 class MenuState: public StateMachine {
 public:
-    MenuState() {}
-    ~MenuState() {}
-    virtual States HandleInput(FRKey k) override {}
-    virtual bool Tick() override {}
+    MenuState();
+    ~MenuState();
+
+    void Init() {
+        GenerateButtons();
+    }
+    virtual States HandleInput(FRKey k) override;
+    virtual bool Tick() override;
 
 private:
-    std::array<Button, 3> m_Buttons;
-    int m_selected_button;
+    void GenerateButtons();
+    Button GenerateButton(const char *text, int i);
+
+private:
+    std::array<Button, CountButton> m_Buttons;
+    int m_selected_button = StartButton;
 };
