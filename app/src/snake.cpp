@@ -12,8 +12,67 @@ void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {
 }
 
 bool Snake::Init() noexcept {
+    
+    snake.push_back({createSprite("app/resources/head.png"),
+                    (m_width + (2 * m_padding)) /2 - cell_width / 2,
+                    m_height / 2  + m_menu_height + m_padding - cell_width / 2,
+                    Direction::UP});
+    for (int i = 0; i < 3; ++i) {
+        // Move();
+        Grow();
+    }
     m_StateManager->Init();
     return true;
+}
+
+void Snake::Grow() noexcept {
+    auto tail = snake.back();
+    int x = tail.x;
+    int y = tail.y;
+
+    // switch (tail.direction) {
+    // case Direction::UP:
+    //     y -= cell_width;
+    //     break;
+    // case Direction::DOWN:
+    //     y += cell_width;
+    //     break;
+    // case Direction::LEFT:
+    //     x -= cell_width;
+    //     break;
+    // case Direction::RIGHT:
+    //     x += cell_width;
+    //     break;
+    // default:
+    //     break;
+    // }
+    Move();
+
+    snake.push_back({createSprite("app/resources/body.png"),
+                    x,
+                    y,
+                    tail.direction});
+}
+
+void Snake::Move() noexcept {
+    for (auto& piece : snake) {
+        switch (piece.direction) {
+        case Direction::UP:
+            piece.y -= cell_width;
+            break;
+        case Direction::DOWN:
+            piece.y += cell_width;
+            break;
+        case Direction::LEFT:
+            piece.x -= cell_width;
+            break;
+        case Direction::RIGHT:
+            piece.x += cell_width;
+            break;
+        default:
+            break;
+        }
+    };
 }
 
 void Snake::Close() noexcept {

@@ -9,8 +9,10 @@ bool GameState::Tick() {
                 m_s->m_padding + m_s->m_menu_height,
                 {54,35,194});
     
-    int w, h;
-    drawSprite(generateTextTexture("Test", 24, {200, 10, 100}, &w, &h), 20, 30);
-
+    // int w, h;
+    // drawSprite(generateTextTexture("Test", 24, {200, 10, 100}, &w, &h), 20, 30);
+    for (const auto& piece : m_s->snake) {
+        drawSprite(piece.sprite, piece.x, piece.y);
+    }
     return false;
 }
