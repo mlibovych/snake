@@ -32,6 +32,8 @@ public:
 	virtual ~Snake() {};
 
 private:
+    static constexpr int m_padding = 30, m_menu_height = 100;
+
     std::unique_ptr<StateMachine> m_StateMachine;
     int m_width, m_height;
 };

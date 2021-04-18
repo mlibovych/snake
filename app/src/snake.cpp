@@ -7,7 +7,8 @@ Snake::Snake(int width, int height) noexcept
 }
 
 void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {
-
+    width = m_width + (2 * m_padding);
+    height = m_height + m_menu_height + (2 * m_padding);
 }
 
 bool Snake::Init() noexcept {
@@ -21,7 +22,7 @@ void Snake::Close() noexcept {
 
 bool Snake::Tick() {
     drawBGColor({0,0,0});
-    drawRect(100,10,20,20,{54,35,194});
+    drawRect(m_width, m_height, m_padding, m_padding + m_menu_height, {54,35,194});
 }
 
 void Snake::onMouseMove(int x, int y, int xrelative, int yrelative) noexcept {
