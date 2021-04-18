@@ -3,7 +3,7 @@
 Snake::Snake(int width, int height) noexcept
     : m_width(width), m_height(height)
 {
-    m_StateMachine = std::make_unique<StateMachine>();
+    m_StateManager = std::make_unique<StateManager>();
 }
 
 void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {
@@ -21,7 +21,7 @@ void Snake::Close() noexcept {
 }
 
 bool Snake::Tick() {
-    return m_StateMachine->Tick(this);
+    return m_StateManager->Tick();
 }
 
 void Snake::onMouseMove(int x, int y, int xrelative, int yrelative) noexcept {

@@ -1,6 +1,9 @@
 set(TARGET race00)
 
-set(SOURCES main.cpp src/snake.cpp src/StateMachine.cpp)
+set(SOURCES main.cpp src/snake.cpp
+            src/StateMachines/StateManager.cpp
+            src/StateMachines/MenuState.cpp
+            src/StateMachines/GameState.cpp)
 
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Wpedantic")
 

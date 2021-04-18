@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Framework.h"
-#include "StateMachine.h"
+#include "StateMachines/StateManager.h"
 
 class StateMachine;
 
@@ -36,6 +36,6 @@ public:
 private:
     static constexpr int m_padding = 30, m_menu_height = 100;
 
-    std::unique_ptr<StateMachine> m_StateMachine;
+    std::unique_ptr<StateManager> m_StateManager;
     int m_width, m_height;
 };
