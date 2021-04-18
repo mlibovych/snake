@@ -1,5 +1,7 @@
 .DS_Store
 .vscode
+race00
+build
 
 # Prerequisites
 *.d

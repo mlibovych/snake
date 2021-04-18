@@ -26,4 +26,6 @@ bool StateMachine::GameTick(Snake *s) {
              s->m_padding,
              s->m_padding + s->m_menu_height,
              {54,35,194});
+
+    return false;
 }

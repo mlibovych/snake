@@ -21,7 +21,7 @@ void Snake::Close() noexcept {
 }
 
 bool Snake::Tick() {
-    m_StateMachine->Tick(this);
+    return m_StateMachine->Tick(this);
 }
 
 void Snake::onMouseMove(int x, int y, int xrelative, int yrelative) noexcept {
