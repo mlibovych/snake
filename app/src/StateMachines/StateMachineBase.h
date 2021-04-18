@@ -5,6 +5,8 @@
 
 #include "Framework.h"
 
+class Snake;
+
 enum States {
     Menu,
     Pause,
@@ -24,4 +26,6 @@ public:
 
     virtual States HandleInput(FRKey k) = 0;
     virtual bool Tick() = 0;
+protected:
+    Snake* s;
 };

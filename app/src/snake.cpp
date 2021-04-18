@@ -3,7 +3,7 @@
 Snake::Snake(int width, int height) noexcept
     : m_width(width), m_height(height)
 {
-    m_StateManager = std::make_unique<StateManager>();
+    m_StateManager = std::make_unique<StateManager>(this);
 }
 
 void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {

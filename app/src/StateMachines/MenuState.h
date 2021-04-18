@@ -5,7 +5,6 @@
 #include "StateMachines/StateMachineBase.h"
 
 class Snake;
-// class StateMachine;
 
 struct Button {
     Sprite *m_texture;
@@ -14,7 +13,7 @@ struct Button {
 
 class MenuState: public StateMachine {
 public:
-    MenuState() {}
+    MenuState(Snake *snake) {}
     ~MenuState() {}
     virtual States HandleInput(FRKey k) override {}
     virtual bool Tick() override {}
