@@ -7,8 +7,10 @@ app/CMakeFiles/race00.dir/main.cpp.o
  ../app/src/snake.h
  /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/main.cpp
 app/CMakeFiles/race00.dir/src/StateMachine.cpp.o
+ ../Framework/inc/Framework.h
  /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.cpp
  /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.h
+ /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/snake.h
 app/CMakeFiles/race00.dir/src/snake.cpp.o
  ../Framework/inc/Framework.h
  /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.h

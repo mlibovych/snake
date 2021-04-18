@@ -3,6 +3,8 @@
 #include "Framework.h"
 #include "StateMachine.h"
 
+class StateMachine;
+
 class Snake : public Framework {
     friend class StateMachine;
 

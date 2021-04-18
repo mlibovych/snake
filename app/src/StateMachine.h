@@ -1,8 +1,13 @@
 #pragma once
 
-#include <memory>
+#include <map>
 
-enum class States {
+#include "Framework.h"
+#include "snake.h"
+
+class Snake;
+
+enum States {
     MainMenu,
     Pause,
     Death,
@@ -12,7 +17,22 @@ enum class States {
 
 class StateMachine {
 public:
+    bool Tick(Snake *snake);
 
 private:
-    States state;
+    bool MainMenuTick(Snake *snake);
+    bool PauseTick(Snake *snake);
+    bool DeathTick(Snake *snake);
+    bool ScoreboardTick(Snake *snake);
+    bool GameTick(Snake *snake);
+
+private:
+    States m_state = Game;
+    std::map<int, bool (StateMachine::*)(Snake*)> m_tick_functions = {
+        {MainMenu, &StateMachine::MainMenuTick},
+        {Pause, &StateMachine::PauseTick},
+        {Death, &StateMachine::DeathTick},
+        {Scoreboard, &StateMachine::ScoreboardTick},
+        {Game, &StateMachine::GameTick},
+    };
 };

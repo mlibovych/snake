@@ -6,8 +6,10 @@ app/CMakeFiles/race00.dir/main.cpp.o: ../app/src/StateMachine.h
 app/CMakeFiles/race00.dir/main.cpp.o: ../app/src/snake.h
 app/CMakeFiles/race00.dir/main.cpp.o: ../app/main.cpp
 
+app/CMakeFiles/race00.dir/src/StateMachine.cpp.o: ../Framework/inc/Framework.h
 app/CMakeFiles/race00.dir/src/StateMachine.cpp.o: ../app/src/StateMachine.cpp
 app/CMakeFiles/race00.dir/src/StateMachine.cpp.o: ../app/src/StateMachine.h
+app/CMakeFiles/race00.dir/src/StateMachine.cpp.o: ../app/src/snake.h
 
 app/CMakeFiles/race00.dir/src/snake.cpp.o: ../Framework/inc/Framework.h
 app/CMakeFiles/race00.dir/src/snake.cpp.o: ../app/src/StateMachine.h

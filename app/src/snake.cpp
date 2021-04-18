@@ -21,8 +21,7 @@ void Snake::Close() noexcept {
 }
 
 bool Snake::Tick() {
-    drawBGColor({0,0,0});
-    drawRect(m_width, m_height, m_padding, m_padding + m_menu_height, {54,35,194});
+    m_StateMachine->Tick(this);
 }
 
 void Snake::onMouseMove(int x, int y, int xrelative, int yrelative) noexcept {

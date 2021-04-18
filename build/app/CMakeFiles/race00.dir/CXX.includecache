@@ -10,29 +10,15 @@
 cstdint
 -
 
-../app/src/StateMachine.h
-memory
--
-
-../app/src/snake.h
-Framework.h
-../app/src/Framework.h
+/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.cpp
 StateMachine.h
-../app/src/StateMachine.h
-
-/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/main.cpp
-snake.h
-/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/snake.h
-iostream
--
-algorithm
--
+/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.h
 
 /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/StateMachine.h
-memory
+map
 -
-
-/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/snake.cpp
+Framework.h
+/Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/Framework.h
 snake.h
 /Users/kali/Documents/Programming/Unit/Gamedev/MarathomAGAIN/race00/app/src/snake.h
 
