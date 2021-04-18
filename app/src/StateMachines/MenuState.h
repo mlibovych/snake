@@ -6,7 +6,6 @@
 #include <map>
 
 class Snake;
-// class StateMachine;
 
 const constexpr int g_menu_label_size = 36;
 const constexpr Color g_label_color = {50, 132, 0};
@@ -28,10 +27,10 @@ struct Button {
 
 class MenuState: public StateMachine {
 public:
-    MenuState();
+    MenuState(Snake *snake) : StateMachine(snake) {}
     ~MenuState();
 
-    void Init() {
+    void Init() override {
         GenerateButtons();
     }
     virtual States HandleInput(FRKey k) override;

@@ -1,9 +1,5 @@
 #include "MenuState.h"
 
-MenuState::MenuState() {
-    
-}
-
 MenuState::~MenuState() {
     for (auto& b : m_Buttons) {
         if (b.m_texture)

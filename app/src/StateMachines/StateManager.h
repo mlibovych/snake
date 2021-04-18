@@ -3,9 +3,11 @@
 #include "MenuState.h"
 #include "GameState.h"
 
+class Snake;
+
 class StateManager {
 public:
-    StateManager();
+    StateManager(Snake *snake);
 
     void Init() {
         m_States[Menu]->Init();
@@ -16,4 +18,5 @@ public:
 private:
     std::array<std::unique_ptr<StateMachine>, States::Count> m_States;
     States m_state = Menu;
+    int m_width, m_height;
 };

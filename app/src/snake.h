@@ -7,6 +7,7 @@ class StateMachine;
 
 class Snake : public Framework {
     friend class StateMachine;
+	friend class GameState;
 
 public:
     Snake(int width, int height) noexcept;

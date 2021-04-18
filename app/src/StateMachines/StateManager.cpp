@@ -1,8 +1,8 @@
 #include "StateManager.h"
 
-StateManager::StateManager() {
-    m_States[Menu] = std::make_unique<MenuState>();
-    m_States[Game] = std::make_unique<GameState>();
+StateManager::StateManager(Snake *snake) {
+    m_States[Menu] = std::make_unique<MenuState>(snake);
+    m_States[Game] = std::make_unique<GameState>(snake);
 }
 
 States StateManager::HandleInput(FRKey k) {
