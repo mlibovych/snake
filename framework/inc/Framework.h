@@ -18,10 +18,10 @@
 
 struct Color
 {
-    int r;
-    int g;
-    int b;
-    int a = 0xFF;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a = 0xFF;
 };
 
 
@@ -38,7 +38,7 @@ FRAMEWORK_API void getScreenSize(int& w, int &h);
 
 FRAMEWORK_API void drawBGColor(Color color);
 FRAMEWORK_API void drawRect(int w, int h, int x, int y, Color color);
-FRAMEWORK_API void drawText(char *text);
+FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color);
 
 // Get the number of milliseconds since library initialization.
 FRAMEWORK_API unsigned int getTickCount();

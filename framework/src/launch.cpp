@@ -172,6 +172,61 @@ FRAMEWORK_API void showCursor(bool bShow)
 	SDL_ShowCursor(bShow?1:0);
 }
 
+FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color) {
+    TTF_Font* font = TTF_OpenFont("./Framework/fonts/font.ttf", font_size);
+
+    if (!font) {
+        std::cerr << "Could not load font! Label will remain empty. Error: " 
+                  << TTF_GetError() << std::endl;
+        return nullptr;
+    }
+
+    SDL_Surface *surfaceMessage = TTF_RenderText_Solid(font, text, {color.r, color.g, color.b, color.a});
+
+    if (!surfaceMessage) {
+        std::cerr << "Could not create surface for a label! Label will remain empty. Error: " 
+                    << TTF_GetError() << std::endl;
+        TTF_CloseFont(font);
+        return nullptr;
+    }
+
+    SDL_Texture *label_tex = SDL_CreateTextureFromSurface(
+        g_renderer,
+        surfaceMessage
+    );
+
+    if (!label_tex) {
+        std::cerr << "Could not create texture from surface! Label will remain empty. Error: " 
+                    << TTF_GetError() << std::endl;
+        TTF_CloseFont(font);
+        SDL_FreeSurface(surfaceMessage);
+        return nullptr;
+    }
+
+    Sprite *sprite = new Sprite;
+
+    if (!sprite) {
+        std::cerr << "Not enough memory!" << std::endl;
+        std::terminate();
+    }
+
+    if (TTF_SizeText(font, text, &sprite->w, &sprite->h)) {
+        std::cerr << "Could not determine label texture size! Label will remain empty. Error: " 
+                    << TTF_GetError() << std::endl;
+        TTF_CloseFont(font);
+        SDL_FreeSurface(surfaceMessage);
+        delete sprite;
+        return nullptr;
+    }
+
+    sprite->tex = label_tex;
+
+    SDL_FreeSurface(surfaceMessage);
+    TTF_CloseFont(font);
+
+    return sprite;
+}
+
 bool GKeyState[(int)FRKey::COUNT] = {};
 
 FRAMEWORK_API int run(Framework* framework)

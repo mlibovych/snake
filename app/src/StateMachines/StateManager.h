@@ -12,5 +12,5 @@ public:
 
 private:
     std::array<std::unique_ptr<StateMachine>, States::Count> m_States;
-    States m_state = Game;
+    States m_state = Menu;
 };

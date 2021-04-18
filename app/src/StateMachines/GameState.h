@@ -17,8 +17,10 @@ public:
              10,
              10,
              {54,35,194});
+        
+        drawSprite(generateTextTexture("Test", 24, {200, 10, 100}), 20, 30);
 
-    return false;
+        return false;
     }
 
 private:
