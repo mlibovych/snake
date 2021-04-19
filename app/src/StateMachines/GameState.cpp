@@ -34,6 +34,7 @@ States GameState::Tick() {
             if (speed > 40) {
                 speed -= 3;
             }
+            score += 10;
         }
     }
     //draw snake
@@ -80,8 +81,7 @@ States GameState::HandleInput(FRKey k) {
     return Game;
 }
 
-
-void GameState::Init() {
+void GameState::Load() {
     int snake_x, snake_y;
 
     snake_x = m_s->m_playfield_w / 2;
@@ -91,6 +91,7 @@ void GameState::Init() {
     snake_y -= snake_y % cell_width;
     snake_y += m_s->m_padding + m_s->m_menu_height;
 
+    snake.clear();
     snake.push_back({createSprite("app/resources/head.png"),
                     snake_x,
                     snake_y,
@@ -98,8 +99,14 @@ void GameState::Init() {
     for (int i = 0; i < 3; ++i) {
         Grow();
     }
-    food.sprite = createSprite("app/resources/straw.png");
+
     SpawnFood();
+}
+
+
+void GameState::Init() {
+    food.sprite = createSprite("app/resources/straw.png");
+    Load();
 }
 
 bool GameState::CheckCollision(Piece& lhs, Piece& rhs) {

@@ -46,7 +46,10 @@ public:
 
     void SpawnFood();
 
+    void Load();
+
 private:
+    int score = 0;
     int speed = 200;
     std::list<Piece> snake;
     uint64_t tick_time, hunger_time;
