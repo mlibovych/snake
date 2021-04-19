@@ -1,10 +1,12 @@
 #include "snake.h"
 
 Snake::Snake(int width, int height) noexcept
-    : m_playfield_w(width), m_playfield_height(height)
+    : m_playfield_w(width), m_playfield_h(height)
 {
+    m_playfield_w -= m_playfield_w % cell_width;
+    m_playfield_h -= m_playfield_h % cell_width;
     m_window_w = m_playfield_w + (2 * m_padding);
-    m_window_h = m_playfield_height + m_menu_height + (2 * m_padding);
+    m_window_h = m_playfield_h + m_menu_height + (2 * m_padding);
     m_StateManager = std::make_unique<StateManager>(this);
 }
 

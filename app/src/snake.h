@@ -43,6 +43,6 @@ private:
 	
     int m_width, m_height;
     int m_window_w, m_window_h;
-    int m_playfield_w, m_playfield_height;
+    int m_playfield_w, m_playfield_h;
     bool m_quit = false;
 };

@@ -9,7 +9,7 @@ States GameState::Tick() {
 
     //draw field
     drawBGColor({0,0,0});
-    drawRect(m_s->m_playfield_w, m_s->m_playfield_height, 
+    drawRect(m_s->m_playfield_w, m_s->m_playfield_h, 
                 m_s->m_padding,
                 m_s->m_padding + m_s->m_menu_height,
                 {54,35,194});
@@ -26,6 +26,14 @@ States GameState::Tick() {
         Move();
         if (CheckCollision()) {
             return Menu;
+        }
+        //grow
+        if (CheckCollision(snake.front(), food)) {
+            Grow();
+            SpawnFood();
+            if (speed > 40) {
+                speed -= 3;
+            }
         }
     }
     //draw snake
@@ -77,7 +85,7 @@ void GameState::Init() {
     int snake_x, snake_y;
 
     snake_x = m_s->m_playfield_w / 2;
-    snake_y = m_s->m_playfield_height / 2;
+    snake_y = m_s->m_playfield_h/ 2;
     snake_x -= snake_x % cell_width;
     snake_x += m_s->m_padding;
     snake_y -= snake_y % cell_width;
@@ -87,7 +95,7 @@ void GameState::Init() {
                     snake_x,
                     snake_y,
                     Direction::UP});
-    for (int i = 0; i < 11; ++i) {
+    for (int i = 0; i < 3; ++i) {
         Grow();
     }
     food.sprite = createSprite("app/resources/straw.png");
@@ -112,7 +120,16 @@ bool GameState::CheckCollision(Piece& lhs, Piece& rhs) {
 }
 
 bool GameState::CheckCollision() {
+    int min_x = m_s->m_padding;
+    int max_x = m_s->m_padding + m_s->m_playfield_w;
+    int min_y = m_s->m_padding + m_s->m_menu_height;
+    int max_y = m_s->m_padding + m_s->m_menu_height + m_s->m_playfield_h;
     bool head = true;
+
+    if (snake.front().x < min_x || snake.front().x > max_x - cell_width ||
+        snake.front().y < min_y || snake.front().y > max_y - cell_width) {
+            return 1;
+        }
 
     for (auto& piece : snake) {
         if (head) {
@@ -137,8 +154,8 @@ static int getRandomCoord(int min, int max) {
 }
 
 void GameState::SpawnFood() {
-    food.x = getRandomCoord(0, m_s->m_playfield_w);
-    food.y = getRandomCoord(0, m_s->m_playfield_height);
+    food.x = getRandomCoord(0, m_s->m_playfield_w - cell_width);
+    food.y = getRandomCoord(0, m_s->m_playfield_h - cell_width);
 
     food.x += m_s->m_padding;
     food.y += m_s->m_padding + m_s->m_menu_height;
