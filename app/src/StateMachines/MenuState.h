@@ -33,7 +33,7 @@ public:
         GenerateButtons();
     }
     virtual States HandleInput(FRKey k) override;
-    virtual bool Tick() override;
+    virtual States Tick() override;
 
 private:
     void GenerateButtons();

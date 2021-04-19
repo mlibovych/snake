@@ -27,7 +27,7 @@ public:
 
     virtual void Init() = 0;
     virtual States HandleInput(FRKey k) = 0;
-    virtual bool Tick() = 0;
+    virtual States Tick() = 0;
 protected:
     // int move_count = 0;
     Snake *m_s;

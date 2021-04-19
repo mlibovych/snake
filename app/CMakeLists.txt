@@ -5,7 +5,7 @@ set(SOURCES main.cpp src/snake.cpp
             src/StateMachines/MenuState.cpp
             src/StateMachines/GameState.cpp)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Wpedantic -g")
 
 include_directories(src)
 include_directories("../Framework/inc")

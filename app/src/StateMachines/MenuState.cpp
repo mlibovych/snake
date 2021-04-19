@@ -33,7 +33,7 @@ States MenuState::HandleInput(FRKey k) {
     return Menu;
 }
 
-bool MenuState::Tick() {
+States MenuState::Tick() {
     drawBGColor({0,0,0});
 
     Rect &r = m_Buttons[m_selected_button].button_rect;
@@ -45,7 +45,7 @@ bool MenuState::Tick() {
                    b.button_rect.y + g_text_padding);
     }
 
-    return false;
+    return Menu;
 }
 
 void MenuState::GenerateButtons() {

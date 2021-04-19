@@ -13,7 +13,7 @@ public:
 
     void Init();
     void HandleInput(FRKey k);
-    bool Tick();
+    void Tick();
 
 private:
     std::array<std::unique_ptr<StateMachine>, States::Count> m_States;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <list>
 
 #include "Framework.h"
 #include "StateMachines/StateManager.h"
@@ -10,19 +9,6 @@ constexpr int cell_width = 16;
 
 class StateMachine;
 
-enum class Direction {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	COUNT
-};
-
-struct Piece {
-	Sprite* sprite;
-	int x, y;
-	Direction direction;
-};
 
 class Snake : public Framework {
     friend class StateMachine;
@@ -48,10 +34,6 @@ public:
 
 	virtual const char* GetTitle() noexcept override;
 
-	void Grow() noexcept;
-
-	void Move() noexcept;
-
 	virtual ~Snake() {};
 
 private:
@@ -60,7 +42,6 @@ private:
     std::unique_ptr<StateManager> m_StateManager;
 	
     int m_width, m_height;
-	std::list<Piece> snake;
     int m_window_w, m_window_h;
     int m_playfield_w, m_playfield_height;
     bool m_quit = false;

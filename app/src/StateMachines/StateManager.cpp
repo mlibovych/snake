@@ -26,6 +26,10 @@ void StateManager::HandleInput(FRKey k) {
     }
 }
 
-bool StateManager::Tick() {
-    return m_States[m_state]->Tick();
+void StateManager::Tick() {
+    States new_state =  m_States[m_state]->Tick();
+
+    if (new_state != m_state) {
+        m_state = new_state;
+    }
 }
