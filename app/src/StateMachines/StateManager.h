@@ -11,10 +11,8 @@ class StateManager {
 public:
     StateManager(Snake *snake);
 
-    void Init() {
-        m_States[Menu]->Init();
-    }
-    States HandleInput(FRKey k);
+    void Init();
+    void HandleInput(FRKey k);
     bool Tick();
 
 private:

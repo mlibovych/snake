@@ -46,11 +46,14 @@ FRAMEWORK_API unsigned int getTickCount();
 FRAMEWORK_API void showCursor(bool bShow);
 
 enum class FRKey {
-	RIGHT,
-	LEFT,
-	DOWN,
-	UP,
-	COUNT
+	RIGHT = 0x4000004F,
+	LEFT = 0x40000050,
+	DOWN = 0x40000051,
+	UP = 0x40000052,
+    ESC = 0x1B,
+    P = 0x70,
+    ENTER = 0x0D,
+	COUNT = 7
 };
 
 enum class FRMouseButton {
@@ -75,9 +78,9 @@ public:
 
 	// param: xrel, yrel: The relative motion in the X/Y direction 
 	// param: x, y : coordinate, relative to window
-	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) = 0;
+	// virtual void onMouseMove(int x, int y, int xrelative, int yrelative) = 0;
 
-	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) = 0;
+	// virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) = 0;
 
 	virtual void onKeyPressed(FRKey k) = 0;
 

@@ -37,7 +37,6 @@ set_target_properties(${MY_LIBNAME}
     LIBRARY_OUTPUT_DIRECTORY ".."
 )
 
-
 target_include_directories(${MY_LIBNAME} PRIVATE .)
 
 include(GNUInstallDirs)

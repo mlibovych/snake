@@ -27,6 +27,7 @@ struct Piece {
 class Snake : public Framework {
     friend class StateMachine;
 	friend class GameState;
+    friend class MenuState;
 
 public:
     Snake(int width, int height) noexcept;
@@ -38,10 +39,6 @@ public:
 	virtual void Close() noexcept override;
 
 	virtual bool Tick() override;
-
-	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) noexcept override;
-
-	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) noexcept override;
 
 	virtual void onKeyPressed(FRKey k) noexcept override;
 
@@ -61,6 +58,10 @@ private:
     static constexpr int m_padding = 30, m_menu_height = 100;
 
     std::unique_ptr<StateManager> m_StateManager;
+	
     int m_width, m_height;
 	std::list<Piece> snake;
+    int m_window_w, m_window_h;
+    int m_playfield_w, m_playfield_height;
+    bool m_quit = false;
 };

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <map>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -125,12 +126,6 @@ FRAMEWORK_API void drawRect(int w, int h, int x, int y, Color color)
     SDL_RenderFillRect(g_renderer, &rect);
 }
 
-FRAMEWORK_API void drawText(char *text)
-{
-    if (!g_renderer)
-        return;
-}
-
 /* Draw a Gimpish background pattern to show transparency in the image */
 static void draw_background(SDL_Renderer *renderer, int w, int h)
 {
@@ -229,7 +224,7 @@ FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color
     return sprite;
 }
 
-bool GKeyState[(int)FRKey::COUNT] = {};
+std::map<uint32_t, bool> GKeyState = {};
 
 FRAMEWORK_API int run(Framework* framework)
 {
@@ -295,17 +290,17 @@ FRAMEWORK_API int run(Framework* framework)
                             case SDLK_LEFT:
                             case SDLK_DOWN:
                             case SDLK_UP:
+                            case SDLK_p:
+                            case SDLK_RETURN:
+                            case SDLK_ESCAPE:
 							{
-								int key_index = (event.key.keysym.sym - SDLK_RIGHT);
-								if (GKeyState[key_index])
+								if (GKeyState[event.key.keysym.sym])
 								{
-									GFramework->onKeyReleased((FRKey)key_index);
-									GKeyState[key_index] = false;
+									GFramework->onKeyReleased((FRKey)event.key.keysym.sym);
+									GKeyState[event.key.keysym.sym] = false;
 								}
 								break;
 							}
-                            case SDLK_ESCAPE:
-								done = 1;
                             break;
 	                        default:
 		                        break;
@@ -313,43 +308,28 @@ FRAMEWORK_API int run(Framework* framework)
                         break;
 					case SDL_KEYDOWN:
 						switch (event.key.keysym.sym) {
-						case SDLK_RIGHT:
-						case SDLK_LEFT:
-						case SDLK_DOWN:
-						case SDLK_UP:
-						{
-							int key_index = (event.key.keysym.sym - SDLK_RIGHT);
-							if (!GKeyState[key_index])
-							{
-								GFramework->onKeyPressed((FRKey)key_index);
-								GKeyState[key_index] = true;
-							}
-						}
+                            case SDLK_RIGHT:
+                            case SDLK_LEFT:
+                            case SDLK_DOWN:
+                            case SDLK_UP:
+                            case SDLK_p:
+                            case SDLK_RETURN:
+                            case SDLK_ESCAPE:
+                            {
+                                if (!GKeyState[event.key.keysym.sym])
+                                {
+                                    GFramework->onKeyPressed((FRKey)event.key.keysym.sym);
+                                    GKeyState[event.key.keysym.sym] = true;
+                                }
+                            }
 							break;
 
 						default:
 							break;
 						}
 						break;
-                    case SDL_MOUSEBUTTONDOWN:
-						if (event.button.button <= SDL_BUTTON_RIGHT) {
-							GFramework->onMouseButtonClick((FRMouseButton)(event.button.button - SDL_BUTTON_LEFT), false);
-						}
-						break;
-                    case SDL_MOUSEBUTTONUP:
-						if (event.button.button <= SDL_BUTTON_RIGHT) {
-							GFramework->onMouseButtonClick((FRMouseButton)(event.button.button - SDL_BUTTON_LEFT), true);
-						}
-                        break;
-					case SDL_MOUSEMOTION:
-						GFramework->onMouseMove(event.motion.x, event.motion.y, event.motion.xrel, event.motion.yrel);
-                        break;
                     case SDL_QUIT:
                         done = 1;
-                        break;
-                    case SDL_WINDOWEVENT:
-                        if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-                            GFramework->onQuitEvent(event.window.windowID);
                         break;
                     default:
                         break;

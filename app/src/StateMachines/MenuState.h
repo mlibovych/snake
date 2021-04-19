@@ -9,7 +9,6 @@ class Snake;
 
 const constexpr int g_menu_label_size = 36;
 const constexpr Color g_label_color = {50, 132, 0};
-const constexpr int g_top_padding = 50, g_side_padding = 100;
 const constexpr int g_text_padding = 10;
 
 enum e_Buttons {
@@ -38,7 +37,8 @@ public:
 
 private:
     void GenerateButtons();
-    Button GenerateButton(const char *text, int i);
+    Button GenerateButton(const char *text);
+    void AlignButtons();
 
 private:
     std::array<Button, CountButton> m_Buttons;
