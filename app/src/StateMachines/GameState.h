@@ -4,10 +4,13 @@
 #include <iostream>
 #include <list>
 #include <random>
+#include <unordered_map>
+#include <deque>
 
 #include "StateMachines/StateMachineBase.h"
 
 class Snake;
+struct Color;
 
 enum class Direction {
 	UP,
@@ -48,14 +51,16 @@ public:
 
     void SpawnFood();
 
+    void drawScore();
+
     void Load();
 
 private:
-    int score = 0;
     int speed = 200;
     std::list<Piece> snake;
     uint64_t tick_time, hunger_time;
     Direction head_direction;
     Piece food;
-    // member varialbles
+    std::unordered_map<int, Sprite*> numbers;
+    int score_w, score_h;
 };

@@ -42,7 +42,7 @@ void Snake::onKeyPressed(int32_t k) noexcept {
 }
 
 void Snake::onKeyReleased(FRKey k) noexcept {
-
+    (void) k;
 }
 
 const char* Snake::GetTitle() noexcept {

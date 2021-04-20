@@ -33,7 +33,10 @@ public:
     virtual void Init() = 0;
     virtual void Enter() = 0;
     virtual States HandleInput(FRKey k) = 0;
-    virtual States HandleInput(int32_t k) {}
+    virtual States HandleInput(int32_t k) {
+        (void) k;
+        return States::Count;
+    }
     virtual States Tick() = 0;
 protected:
     // int move_count = 0;
