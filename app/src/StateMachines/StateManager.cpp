@@ -30,7 +30,7 @@ void StateManager::HandleInput(int32_t k) {
     if (m_state != Death)
         return;
 
-    States new_state = m_States[m_state]->HandleInput(k);
+    m_States[m_state]->HandleInput(k);
 }
 
 bool StateManager::Tick() {

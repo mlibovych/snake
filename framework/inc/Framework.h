@@ -13,6 +13,10 @@
     #define FRAMEWORK_API 
 #endif
 
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
+
 
 // Bonus for any found bugs in the framework!
 
@@ -25,7 +29,13 @@ struct Color
 };
 
 
-class Sprite;
+class Sprite {
+public:
+	Sprite():w(0), h(0), tex(nullptr) {}
+
+	int w, h;
+	SDL_Texture* tex;
+};
 
 FRAMEWORK_API Sprite* createSprite(const char* path);
 FRAMEWORK_API void drawSprite(Sprite*, int x, int y);

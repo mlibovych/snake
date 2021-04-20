@@ -25,13 +25,6 @@ static int g_framework_initialized = false;
  * structure declarations
  */
 
-class Sprite {
-public:
-	Sprite():w(0), h(0), tex(nullptr) {}
-
-	int w, h;
-	SDL_Texture* tex;
-};
 
 FRAMEWORK_API Sprite* createSprite(const char* path)
 {

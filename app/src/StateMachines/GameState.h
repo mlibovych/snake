@@ -61,7 +61,6 @@ private:
     uint64_t tick_time, hunger_time;
     Direction head_direction;
     Piece food;
-    Sprite *score_label;
     std::unordered_map<int, Sprite*> numbers;
     int score_w, score_h;
 };

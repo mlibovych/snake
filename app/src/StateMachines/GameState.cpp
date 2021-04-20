@@ -20,7 +20,7 @@ States GameState::Tick() {
         snake.pop_back();
     }
     //move
-    if (now - tick_time > speed) {
+    if (now - tick_time > static_cast<uint64_t> (speed)) {
         tick_time = now;
         Move();
         if (CheckCollision()) {
@@ -122,7 +122,7 @@ void GameState::Load() {
 
     SpawnFood();
     speed = 200;
-    head_direction = Direction::UP;§
+    head_direction = Direction::UP;
     m_s->score = 0;
 }
 
@@ -131,7 +131,7 @@ void GameState::Init() {
     food.sprite = createSprite("app/resources/straw.png");
 
     for (int i = 0; i <= 9; i++) {
-        numbers[i] = generateTextTexture(std::to_string(i).c_str(), 40, g_label_color,
+        numbers[i] = generateTextTexture(std::to_string(i).c_str(), 40, label_color,
             &score_w, &score_h);
     }
     Load();

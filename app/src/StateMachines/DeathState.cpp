@@ -36,8 +36,8 @@ void DeathState::Enter() {
         delete m_label2.m_texture;
 
     std::string text1 = "Your score is ";
-    // text += std::to_string(m_s->m_score);
-    text1 += "123";
+    text1 += std::to_string(m_s->score);
+    // text1 += "123";
     std::string text2 = "Please enter your name:";
 
     m_label1.m_texture = generateTextTexture(text1.c_str(), m_text_size_labels,
