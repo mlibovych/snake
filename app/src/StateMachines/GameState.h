@@ -35,7 +35,9 @@ public:
 
     virtual void Init() override;
 
-    virtual void Enter() override {}
+    virtual void Enter() override {
+        Load();
+    }
 
     virtual States HandleInput(FRKey k) override;
     
