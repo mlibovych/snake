@@ -168,7 +168,7 @@ FRAMEWORK_API void showCursor(bool bShow)
 }
 
 FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color, int *w, int *h) {
-    TTF_Font* font = TTF_OpenFont("./Framework/fonts/font.ttf", font_size);
+    TTF_Font* font = TTF_OpenFont("./framework/fonts/font.ttf", font_size);
 
     if (!font) {
         std::cerr << "Could not load font! Label will remain empty. Error: " 

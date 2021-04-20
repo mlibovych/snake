@@ -8,7 +8,7 @@
 class Snake;
 
 const constexpr int g_menu_label_size = 36;
-const constexpr Color g_label_color = {50, 132, 0};
+const constexpr Color label_color = {50, 132, 0};
 const constexpr int g_text_padding = 10;
 
 enum e_Buttons {
@@ -29,9 +29,8 @@ public:
     MenuState(Snake *snake) : StateMachine(snake) {}
     ~MenuState();
 
-    void Init() override {
-        GenerateButtons();
-    }
+    virtual void Init() override;
+    virtual void Enter() override {};
     virtual States HandleInput(FRKey k) override;
     virtual bool Tick() override;
 

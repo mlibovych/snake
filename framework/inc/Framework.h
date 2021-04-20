@@ -86,8 +86,6 @@ public:
 
 	virtual void onKeyReleased(FRKey k) = 0;
 
-    virtual bool onQuitEvent(uint32_t win_id) = 0;
-
 	virtual const char* GetTitle() = 0;
 
 	virtual ~Framework() {};

@@ -2,6 +2,7 @@
 
 StateManager::StateManager(Snake *snake) {
     m_States[Menu] = std::make_unique<MenuState>(snake);
+    m_States[Scoreboard] = std::make_unique<ScoreboardState>(snake);
     m_States[Game] = std::make_unique<GameState>(snake);
 }
 
@@ -10,19 +11,21 @@ void StateManager::Init() {
     //     s->Init();
 
     m_States[Menu]->Init();
+    m_States[Scoreboard]->Init();
     m_States[Game]->Init();
 }
 
-void StateManager::HandleInput(FRKey k) {
-    if (k == FRKey::ESC) {
-        m_state = Menu;
-        return;
-    }
+void StateManager::Enter(States state) {
+    m_state = state;
 
+    m_States[state]->Enter();
+}
+
+void StateManager::HandleInput(FRKey k) {
     States new_state = m_States[m_state]->HandleInput(k);
 
     if (new_state != m_state) {
-        m_state = new_state;
+        Enter(new_state);
     }
 }
 

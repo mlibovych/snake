@@ -9,7 +9,8 @@ public:
     GameState(Snake *snake) : StateMachine(snake) {}
     ~GameState() {}
 
-    virtual void Init() {}
+    virtual void Init() override {}
+    virtual void Enter() override {}
     virtual States HandleInput(FRKey k) override {if (k == FRKey::ESC) return Menu; else return Game;}
     virtual bool Tick() override;
 

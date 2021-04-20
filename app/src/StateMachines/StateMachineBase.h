@@ -10,7 +10,6 @@ class Snake;
 enum States {
     Menu,
     Pause,
-    Death,
     Scoreboard,
     Game,
     Count
@@ -26,6 +25,7 @@ public:
     virtual ~StateMachine() {};
 
     virtual void Init() = 0;
+    virtual void Enter() = 0;
     virtual States HandleInput(FRKey k) = 0;
     virtual bool Tick() = 0;
 protected:

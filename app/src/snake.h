@@ -25,8 +25,6 @@ public:
 
 	virtual void onKeyReleased(FRKey k) noexcept override;
 
-    virtual bool onQuitEvent(uint32_t win_id) noexcept override;
-
 	virtual const char* GetTitle() noexcept override;
 
 	virtual ~Snake() {};

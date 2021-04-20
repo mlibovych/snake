@@ -8,12 +8,16 @@ MenuState::~MenuState() {
     }
 }
 
+void MenuState::Init() {
+    GenerateButtons();
+}
+
 States MenuState::HandleInput(FRKey k) {
     if (k == FRKey::ENTER) {
         if (m_selected_button == StartButton)
             return Game;
-        // else if (m_selected_button == Scoreboard)
-        //     return Scoreboard;
+        else if (m_selected_button == ScoreButton)
+            return Scoreboard;
         else if (m_selected_button == ExitButton) {
             m_s->m_quit = true;
             return Menu;
@@ -65,7 +69,7 @@ void MenuState::GenerateButtons() {
 Button MenuState::GenerateButton(const char *text) {
     Button b;
 
-    b.m_texture = generateTextTexture(text, g_menu_label_size, g_label_color, &b.texture_w, &b.texture_h);
+    b.m_texture = generateTextTexture(text, g_menu_label_size, label_color, &b.texture_w, &b.texture_h);
 
     return b;
 }
