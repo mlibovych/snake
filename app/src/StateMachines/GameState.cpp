@@ -29,6 +29,7 @@ States GameState::Tick() {
         }
         //grow
         if (CheckCollision(snake.front(), food)) {
+            hunger_time = now;
             Grow();
             SpawnFood();
             if (speed > 40) {
