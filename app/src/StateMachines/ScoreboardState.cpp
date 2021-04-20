@@ -108,8 +108,6 @@ void ScoreboardState::UpdateLeaderboard(std::istream& file) {
     side_padding = m_s->AlignHorizontally(m_Leaders[0].tex_w, text_padding);
     int total_height_of_labels = 10 * (m_Leaders[0].tex_h + text_padding);
     top_padding = (m_s->m_window_h - total_height_of_labels) / 2;
-
-    std::cout << m_s->m_window_h << " " << total_height_of_labels << " " << " " << m_Leaders[0].tex_h << " " << top_padding << std::endl;
 }
 
 void ScoreboardState::CreateTextTexture(int i) {

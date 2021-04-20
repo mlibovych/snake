@@ -2,7 +2,7 @@
 #include "../snake.h"
 
 void DeathState::Init() {
-    int text_size_letters = 30;
+    int text_size_letters = 40;
 
     if (m_s->m_window_h >= 500 && m_s->m_window_h >= 500) {
         text_size_letters = 50;
@@ -25,7 +25,7 @@ void DeathState::Init() {
     }
 
     m_input_rect.h = m_letters['a'].texture_h + (2 * text_padding);
-    m_input_rect.w = (m_letters['a'].texture_w * max_name_len) + (2 * text_padding);
+    m_input_rect.w = ((m_letters['a'].texture_w + letter_padding) * max_name_len);
     m_input_rect.x = m_s->AlignHorizontally(m_input_rect.w, 0);
 }
 
@@ -53,21 +53,64 @@ void DeathState::Enter() {
 
 States DeathState::HandleInput(FRKey k) {
     if (k == FRKey::ENTER && m_username.size() >= 1) {
-        // SaveScore();
         return Scoreboard;
     }
     return Death;
 }
 
 States DeathState::HandleInput(int32_t k) {
-    std::cout << char(k) << std::endl;
+    if (m_username.size() < 8) {
+        m_username += (char)k; 
+    }
+
     return Death;
 }
 
 States DeathState::Tick() {
     drawSprite(m_label1.m_texture, m_label1.button_rect.x, text_padding);
     drawSprite(m_label2.m_texture, m_label2.button_rect.x, text_padding + m_label1.texture_h + text_padding);
-    drawRect(m_input_rect.w, m_input_rect.h, m_input_rect.x, m_input_rect.y, {114, 125, 107});
+    drawRect(m_input_rect.w, m_input_rect.h, m_input_rect.x, m_input_rect.y, {16, 26, 0});
+
+    for (int i = 0; i < m_username.size(); ++i) {
+        drawSprite(m_letters[m_username[i]].m_texture,
+                   m_input_rect.x + (letter_padding * (i + 1)),
+                   m_input_rect.y + letter_padding);
+    }
+
     return Death;
 }
 
+void DeathState::SaveScore() {
+    std::ifstream file("./app/resources/.leaderboard");
+    std::string text;
+    std::string line;
+    bool added;
+
+    while (std::getline(file, line)) {
+        auto pos = line.find(' ');
+
+        if (pos == std::string::npos) {
+            ..
+        }
+
+        std::string points = std::string(line.begin() + pos + 1, line.end());
+        auto pred = [](char c) {return !std::isdigit(c);};
+
+        if (std::find_if(points.begin(), points.end(), pred) != points.end()) {
+            ..
+        }
+        else {
+            try {
+                if (std::stoi(points) >= ) {
+
+                }
+            }
+            catch (std::invalid_argument& e) {
+                ..
+            }
+            catch (std::out_of_range& e) {
+                ..
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@
 
 #include "StateMachines/StateMachineBase.h"
 #include <string>
-#include <algorithm>
+#include <fstream>
 
 class Snake;
 
@@ -18,8 +18,12 @@ public:
     virtual States Tick() override;
 
 private:
+    void SaveScore();
+
+private:
     const static constexpr Color label_color = {50, 132, 0};
     const static constexpr int text_padding = 30;
+    const static constexpr int letter_padding = 20;
     const static constexpr int max_name_len = 8;
 
     Button m_label1;
