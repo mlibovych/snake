@@ -8,11 +8,10 @@ using namespace std::chrono;
 States GameState::Tick() {
     uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     //draw field
-    drawBGColor({0,0,0});
     drawRect(m_s->m_playfield_w, m_s->m_playfield_h, 
                 m_s->m_padding,
                 m_s->m_padding + m_s->m_menu_height,
-                {54,35,194});
+                {8,22,0});
     //food
     drawSprite(food.sprite, food.x, food.y);
     //growing
@@ -25,7 +24,7 @@ States GameState::Tick() {
         tick_time = now;
         Move();
         if (CheckCollision()) {
-            return Menu;
+            return Death;
         }
         //grow
         if (CheckCollision(snake.front(), food)) {
@@ -44,7 +43,7 @@ States GameState::Tick() {
     }
     //check state
     if (snake.size() < 2) {
-        return Menu;
+        return Death;
     }
     //score
     drawScore();
@@ -72,8 +71,6 @@ void GameState::drawScore() {
 }
 
 States GameState::HandleInput(FRKey k) {
-    if (k == FRKey::ESC) return Menu;
-
     Direction& direction = snake.front().direction;
     if (direction == Direction::UP ||
         direction == Direction::DOWN) {

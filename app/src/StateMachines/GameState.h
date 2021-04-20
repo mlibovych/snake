@@ -33,7 +33,9 @@ public:
     }
     ~GameState() {}
 
-    virtual void Init();
+    virtual void Init() override;
+
+    virtual void Enter() override {}
 
     virtual States HandleInput(FRKey k) override;
     

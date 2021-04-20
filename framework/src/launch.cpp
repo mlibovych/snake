@@ -168,7 +168,7 @@ FRAMEWORK_API void showCursor(bool bShow)
 }
 
 FRAMEWORK_API Sprite *generateTextTexture(const char *text, int font_size, Color color, int *w, int *h) {
-    TTF_Font* font = TTF_OpenFont("./Framework/fonts/font.ttf", font_size);
+    TTF_Font* font = TTF_OpenFont("./framework/fonts/font.ttf", font_size);
 
     if (!font) {
         std::cerr << "Could not load font! Label will remain empty. Error: " 
@@ -324,8 +324,11 @@ FRAMEWORK_API int run(Framework* framework)
                             }
 							break;
 
-						default:
-							break;
+                            default: {
+                                if (event.key.keysym.sym >= 97 && event.key.keysym.sym <= 122) {
+                                    GFramework->onKeyPressed((int32_t)event.key.keysym.sym);
+                                }
+                            }
 						}
 						break;
                     case SDL_QUIT:

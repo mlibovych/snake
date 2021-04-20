@@ -8,12 +8,16 @@ MenuState::~MenuState() {
     }
 }
 
+void MenuState::Init() {
+    GenerateButtons();
+}
+
 States MenuState::HandleInput(FRKey k) {
     if (k == FRKey::ENTER) {
         if (m_selected_button == StartButton)
             return Game;
-        // else if (m_selected_button == Scoreboard)
-        //     return Scoreboard;
+        else if (m_selected_button == ScoreButton)
+            return Scoreboard;
         else if (m_selected_button == ExitButton) {
             m_s->m_quit = true;
             return Menu;
@@ -34,8 +38,6 @@ States MenuState::HandleInput(FRKey k) {
 }
 
 States MenuState::Tick() {
-    drawBGColor({0,0,0});
-
     Rect &r = m_Buttons[m_selected_button].button_rect;
     drawRect(r.w, r.h, r.x, r.y, {24, 42, 2});
 
@@ -65,7 +67,7 @@ void MenuState::GenerateButtons() {
 Button MenuState::GenerateButton(const char *text) {
     Button b;
 
-    b.m_texture = generateTextTexture(text, g_menu_label_size, g_label_color, &b.texture_w, &b.texture_h);
+    b.m_texture = generateTextTexture(text, g_menu_label_size, label_color, &b.texture_w, &b.texture_h);
 
     return b;
 }
@@ -77,7 +79,7 @@ void MenuState::AlignButtons() {
 
     for (int i = 0; i < CountButton; ++i) {
         int texture_w = m_Buttons[i].texture_w;
-        int side_padding = (m_s->m_window_w - (texture_w + (2 * g_text_padding))) / 2;
+        int side_padding = m_s->AlignHorizontally(texture_w, g_text_padding);
 
         m_Buttons[i].button_rect = {side_padding,
                                     top_padding + ((texture_h + g_text_padding) * i),

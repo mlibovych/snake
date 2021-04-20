@@ -4,6 +4,8 @@
 
 #include "MenuState.h"
 #include "GameState.h"
+#include "ScoreboardState.h"
+#include "DeathState.h"
 
 class Snake;
 
@@ -12,11 +14,12 @@ public:
     StateManager(Snake *snake);
 
     void Init();
+    void Enter(States state);
     void HandleInput(FRKey k);
-    void Tick();
+    void HandleInput(int32_t k);
+    bool Tick();
 
 private:
     std::array<std::unique_ptr<StateMachine>, States::Count> m_States;
-    States m_state = Game;
-    int m_width, m_height;
+    States m_state = Menu;
 };

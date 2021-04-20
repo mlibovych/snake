@@ -13,6 +13,7 @@ Snake::Snake(int width, int height) noexcept
 void Snake::PreInit(int& width, int& height, bool& fullscreen) noexcept {
     width = m_window_w;
     height = m_window_h;
+    fullscreen = false;
 }
 
 bool Snake::Init() noexcept {
@@ -29,25 +30,18 @@ bool Snake::Tick() {
         return true;
 
     m_StateManager->Tick();
+    return false;
 }
-
-// void Snake::onMouseMove(int x, int y, int xrelative, int yrelative) noexcept {
-
-// }
-
-// void Snake::onMouseButtonClick(FRMouseButton button, bool isReleased) noexcept {
-
-// }
 
 void Snake::onKeyPressed(FRKey k) noexcept {
     m_StateManager->HandleInput(k);
 }
 
-void Snake::onKeyReleased(FRKey k) noexcept {
-
+void Snake::onKeyPressed(int32_t k) noexcept {
+    m_StateManager->HandleInput(k);
 }
 
-bool Snake::onQuitEvent(uint32_t win_id) noexcept {
+void Snake::onKeyReleased(FRKey k) noexcept {
 
 }
 
