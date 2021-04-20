@@ -54,7 +54,11 @@ void DeathState::Enter() {
 States DeathState::HandleInput(FRKey k) {
     if (k == FRKey::ENTER && m_username.size() >= 1) {
         SaveScore();
+        m_username = "";
         return Scoreboard;
+    }
+    else if (k == FRKey::BACKSPACE && !m_username.empty()) {
+        m_username.erase(m_username.end() - 1);
     }
     return Death;
 }
@@ -63,6 +67,7 @@ States DeathState::HandleInput(int32_t k) {
     if (m_username.size() < 8) {
         m_username += (char)k; 
     }
+    std::cout << (char)k << std::endl;
 
     return Death;
 }
@@ -97,7 +102,7 @@ void DeathState::SaveScore() {
             ++lines;
 
             if (lines < 9) {
-                text += line;
+                text += line + '\n';
                 ++lines;
             }
             continue;
@@ -112,20 +117,20 @@ void DeathState::SaveScore() {
             ++lines;
 
             if (lines < 9) {
-                text += line;
+                text += line + '\n';
                 ++lines;
             }
             continue;
         }
         else {
             try {
-                if (!added && std::stoi(points) <= m_s->score) {
+                if (!added && std::stoi(points) < m_s->score) {
                     text += m_username + " " + std::to_string(m_s->score) + '\n';
                     added = true;
                     ++lines;
 
                     if (lines < 9) {
-                        text += line;
+                        text += line + '\n';
                         ++lines;
                     }
                     continue;
@@ -138,7 +143,7 @@ void DeathState::SaveScore() {
                     ++lines;
                 
                     if (lines < 9) {
-                        text += line;
+                        text += line + '\n';
                         ++lines;
                     }
                     continue;
@@ -151,7 +156,7 @@ void DeathState::SaveScore() {
                     ++lines;
 
                     if (lines < 9) {
-                        text += line;
+                        text += line + '\n';
                         ++lines;
                     }
                     continue;

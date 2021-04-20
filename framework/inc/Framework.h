@@ -61,8 +61,8 @@ enum class FRKey {
 	DOWN = 0x40000051,
 	UP = 0x40000052,
     ESC = 0x1B,
-    P = 0x70,
     ENTER = 0x0D,
+    BACKSPACE = 8,
 	COUNT = 7
 };
 

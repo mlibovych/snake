@@ -283,9 +283,9 @@ FRAMEWORK_API int run(Framework* framework)
                             case SDLK_LEFT:
                             case SDLK_DOWN:
                             case SDLK_UP:
-                            case SDLK_p:
                             case SDLK_RETURN:
                             case SDLK_ESCAPE:
+                            case SDLK_BACKSPACE:
 							{
 								if (GKeyState[event.key.keysym.sym])
 								{
@@ -305,9 +305,9 @@ FRAMEWORK_API int run(Framework* framework)
                             case SDLK_LEFT:
                             case SDLK_DOWN:
                             case SDLK_UP:
-                            case SDLK_p:
                             case SDLK_RETURN:
                             case SDLK_ESCAPE:
+                            case SDLK_BACKSPACE:
                             {
                                 if (!GKeyState[event.key.keysym.sym])
                                 {
