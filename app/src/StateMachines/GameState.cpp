@@ -1,12 +1,12 @@
 #include "GameState.h"
 
+#include "Framework.h"
 #include "../snake.h"
 
 using namespace std::chrono;
 
 States GameState::Tick() {
     uint64_t now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-
     //draw field
     drawBGColor({0,0,0});
     drawRect(m_s->m_playfield_w, m_s->m_playfield_h, 
@@ -32,10 +32,10 @@ States GameState::Tick() {
             hunger_time = now;
             Grow();
             SpawnFood();
-            if (speed > 40) {
-                speed -= 3;
+            if (speed > 30) {
+                speed -= 4;
             }
-            score += 10;
+            m_s->score += 10;
         }
     }
     //draw snake
@@ -46,7 +46,29 @@ States GameState::Tick() {
     if (snake.size() < 2) {
         return Menu;
     }
+    //score
+    drawScore();
     return Game;
+}
+
+void GameState::drawScore() {
+    int score = m_s->score;
+    int x, y;
+    std::deque<Sprite*> score_sprites;
+
+    x = y = m_s->m_padding;
+    if (!score) {
+        drawSprite(numbers[score], x, y);
+        return;
+    }
+    while (score) {
+        score_sprites.push_front(numbers[score % 10]);
+        score /= 10;
+    }
+    for (const auto& sprite : score_sprites) {
+        drawSprite(sprite, x, y);
+        x += score_w;
+    }
 }
 
 States GameState::HandleInput(FRKey k) {
@@ -86,7 +108,7 @@ void GameState::Load() {
     int snake_x, snake_y;
 
     snake_x = m_s->m_playfield_w / 2;
-    snake_y = m_s->m_playfield_h/ 2;
+    snake_y = m_s->m_playfield_h / 2;
     snake_x -= snake_x % cell_width;
     snake_x += m_s->m_padding;
     snake_y -= snake_y % cell_width;
@@ -102,11 +124,19 @@ void GameState::Load() {
     }
 
     SpawnFood();
+    speed = 200;
+    head_direction = Direction::UP;§
+    m_s->score = 0;
 }
 
 
 void GameState::Init() {
     food.sprite = createSprite("app/resources/straw.png");
+
+    for (int i = 0; i <= 9; i++) {
+        numbers[i] = generateTextTexture(std::to_string(i).c_str(), 40, g_label_color,
+            &score_w, &score_h);
+    }
     Load();
 }
 

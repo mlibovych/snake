@@ -45,4 +45,6 @@ private:
     int m_window_w, m_window_h;
     int m_playfield_w, m_playfield_h;
     bool m_quit = false;
+
+    int score = 0;
 };
