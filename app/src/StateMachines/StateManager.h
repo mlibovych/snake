@@ -5,6 +5,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "ScoreboardState.h"
+#include "DeathState.h"
 
 class Snake;
 
@@ -15,6 +16,7 @@ public:
     void Init();
     void Enter(States state);
     void HandleInput(FRKey k);
+    void HandleInput(int32_t k);
     bool Tick();
 
 private:

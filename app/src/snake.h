@@ -15,6 +15,7 @@ class Snake : public Framework {
 	friend class GameState;
     friend class MenuState;
     friend class ScoreboardState;
+    friend class DeathState;
 
 public:
     Snake(int width, int height) noexcept;
@@ -28,12 +29,17 @@ public:
 	virtual bool Tick() override;
 
 	virtual void onKeyPressed(FRKey k) noexcept override;
+    virtual void onKeyPressed(int32_t k) noexcept override;
 
 	virtual void onKeyReleased(FRKey k) noexcept override;
 
 	virtual const char* GetTitle() noexcept override;
 
 	virtual ~Snake() {};
+
+    int AlignHorizontally(int tex_w, int text_padding) {
+        return (m_window_w - (tex_w + (2 * text_padding))) / 2;
+    }
 
 private:
     static constexpr int m_padding = 30, m_menu_height = 100;

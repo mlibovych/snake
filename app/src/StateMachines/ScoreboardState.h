@@ -42,5 +42,5 @@ private:
     const static constexpr int dots_between = 10;
     const static constexpr Color label_color = {50, 132, 0};
     const static constexpr int text_padding = 10;
-    const static constexpr int text_size = 20;
+    int text_size = 30;
 };

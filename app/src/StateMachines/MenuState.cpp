@@ -79,7 +79,7 @@ void MenuState::AlignButtons() {
 
     for (int i = 0; i < CountButton; ++i) {
         int texture_w = m_Buttons[i].texture_w;
-        int side_padding = (m_s->m_window_w - (texture_w + (2 * g_text_padding))) / 2;
+        int side_padding = m_s->AlignHorizontally(texture_w, g_text_padding);
 
         m_Buttons[i].button_rect = {side_padding,
                                     top_padding + ((texture_h + g_text_padding) * i),

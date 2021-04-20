@@ -7,7 +7,7 @@
 
 class Snake;
 
-const constexpr int g_menu_label_size = 36;
+const constexpr int g_menu_label_size = 52;
 const constexpr Color label_color = {50, 132, 0};
 const constexpr int g_text_padding = 10;
 

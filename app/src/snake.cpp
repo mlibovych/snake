@@ -37,6 +37,10 @@ void Snake::onKeyPressed(FRKey k) noexcept {
     m_StateManager->HandleInput(k);
 }
 
+void Snake::onKeyPressed(int32_t k) noexcept {
+    m_StateManager->HandleInput(k);
+}
+
 void Snake::onKeyReleased(FRKey k) noexcept {
 
 }

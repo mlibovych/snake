@@ -96,7 +96,6 @@ void ScoreboardState::UpdateLeaderboard(std::istream& file) {
 
         m_Leaders[i] = score;
         CreateTextTexture(i);
-        // std::cout << score.name << " " << score.points << std::endl;
 
         ++i;
     }
@@ -106,9 +105,11 @@ void ScoreboardState::UpdateLeaderboard(std::istream& file) {
         CreateTextTexture(i++);
     }
 
-    side_padding = (m_s->m_window_w - (m_Leaders[0].tex_w + (2 * text_padding))) / 2;;
-    int total_height_of_labels = 10 * (m_Leaders[0].tex_h + (2 * text_padding));
+    side_padding = m_s->AlignHorizontally(m_Leaders[0].tex_w, text_padding);
+    int total_height_of_labels = 10 * (m_Leaders[0].tex_h + text_padding);
     top_padding = (m_s->m_window_h - total_height_of_labels) / 2;
+
+    std::cout << m_s->m_window_h << " " << total_height_of_labels << " " << " " << m_Leaders[0].tex_h << " " << top_padding << std::endl;
 }
 
 void ScoreboardState::CreateTextTexture(int i) {
@@ -124,6 +125,9 @@ void ScoreboardState::CreateTextTexture(int i) {
     line += std::string(max_name_len - score.name.size() + dots_between, '.');
     line += std::string(max_score_len - score.points.size(), '.');
     line += score.points;
+
+    if (m_s->m_window_h >= 500 && m_s->m_window_h >= 500)
+        text_size = 50;
 
     score.m_texture = generateTextTexture(line.c_str(), text_size, label_color, &score.tex_w, &score.tex_h);
 }

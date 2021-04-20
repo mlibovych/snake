@@ -9,10 +9,9 @@ class Snake;
 
 enum States {
     Menu,
-    Pause,
     Scoreboard,
     Game,
-    Exit,
+    Death,
     Count
 };
 
@@ -34,6 +33,7 @@ public:
     virtual void Init() = 0;
     virtual void Enter() = 0;
     virtual States HandleInput(FRKey k) = 0;
+    virtual States HandleInput(int32_t k) {}
     virtual States Tick() = 0;
 protected:
     // int move_count = 0;

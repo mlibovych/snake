@@ -324,8 +324,11 @@ FRAMEWORK_API int run(Framework* framework)
                             }
 							break;
 
-						default:
-							break;
+                            default: {
+                                if (event.key.keysym.sym >= 97 && event.key.keysym.sym <= 122) {
+                                    GFramework->onKeyPressed((int32_t)event.key.keysym.sym);
+                                }
+                            }
 						}
 						break;
                     case SDL_QUIT:
