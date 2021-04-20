@@ -53,6 +53,7 @@ void DeathState::Enter() {
 
 States DeathState::HandleInput(FRKey k) {
     if (k == FRKey::ENTER && m_username.size() >= 1) {
+        SaveScore();
         return Scoreboard;
     }
     return Death;
@@ -71,7 +72,7 @@ States DeathState::Tick() {
     drawSprite(m_label2.m_texture, m_label2.button_rect.x, text_padding + m_label1.texture_h + text_padding);
     drawRect(m_input_rect.w, m_input_rect.h, m_input_rect.x, m_input_rect.y, {16, 26, 0});
 
-    for (int i = 0; i < m_username.size(); ++i) {
+    for (size_t i = 0; i < m_username.size(); ++i) {
         drawSprite(m_letters[m_username[i]].m_texture,
                    m_input_rect.x + (letter_padding * (i + 1)),
                    m_input_rect.y + letter_padding);
@@ -84,33 +85,95 @@ void DeathState::SaveScore() {
     std::ifstream file("./app/resources/.leaderboard");
     std::string text;
     std::string line;
-    bool added;
+    bool added = false;
+    int lines = 0;
 
     while (std::getline(file, line)) {
         auto pos = line.find(' ');
 
-        if (pos == std::string::npos) {
-            // ..
+        if (pos == std::string::npos && !added) {
+            text += m_username + " " + std::to_string(m_s->score) + '\n';
+            added = true;
+            ++lines;
+
+            if (lines < 9) {
+                text += line;
+                ++lines;
+            }
+            continue;
         }
 
         std::string points = std::string(line.begin() + pos + 1, line.end());
         auto pred = [](char c) {return !std::isdigit(c);};
 
-        if (std::find_if(points.begin(), points.end(), pred) != points.end()) {
-            // ..
+        if (std::find_if(points.begin(), points.end(), pred) != points.end() && !added) {
+            text += m_username + " " + std::to_string(m_s->score) + '\n';
+            added = true;
+            ++lines;
+
+            if (lines < 9) {
+                text += line;
+                ++lines;
+            }
+            continue;
         }
         else {
             try {
-                if (std::stoi(points)) {
+                if (!added && std::stoi(points) <= m_s->score) {
+                    text += m_username + " " + std::to_string(m_s->score) + '\n';
+                    added = true;
+                    ++lines;
 
+                    if (lines < 9) {
+                        text += line;
+                        ++lines;
+                    }
+                    continue;
                 }
             }
             catch (std::invalid_argument& e) {
-                // ..
+                if (!added) {
+                    text += m_username + " " + std::to_string(m_s->score) + '\n';
+                    added = true;
+                    ++lines;
+                
+                    if (lines < 9) {
+                        text += line;
+                        ++lines;
+                    }
+                    continue;
+                }
             }
             catch (std::out_of_range& e) {
-                // ..
+                if (!added) {
+                    text += m_username + " " + std::to_string(m_s->score) + '\n';
+                    added = true;
+                    ++lines;
+
+                    if (lines < 9) {
+                        text += line;
+                        ++lines;
+                    }
+                    continue;
+                }
             }
         }
+
+        if (lines < 10) {
+            text += line + '\n';
+            ++lines;
+        }
+        else {
+            break;
+        }
     }
+
+    if (!added && lines < 9)
+        text += m_username + " " + std::to_string(m_s->score);
+
+    file.close();
+
+    std::ofstream out_file("./app/resources/.leaderboard");
+    out_file << text;
+    out_file.close();
 }
