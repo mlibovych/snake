@@ -90,26 +90,26 @@ void DeathState::SaveScore() {
         auto pos = line.find(' ');
 
         if (pos == std::string::npos) {
-            ..
+            // ..
         }
 
         std::string points = std::string(line.begin() + pos + 1, line.end());
         auto pred = [](char c) {return !std::isdigit(c);};
 
         if (std::find_if(points.begin(), points.end(), pred) != points.end()) {
-            ..
+            // ..
         }
         else {
             try {
-                if (std::stoi(points) >= ) {
+                if (std::stoi(points)) {
 
                 }
             }
             catch (std::invalid_argument& e) {
-                ..
+                // ..
             }
             catch (std::out_of_range& e) {
-                ..
+                // ..
             }
         }
     }
