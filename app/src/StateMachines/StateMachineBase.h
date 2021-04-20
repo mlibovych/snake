@@ -12,11 +12,18 @@ enum States {
     Pause,
     Scoreboard,
     Game,
+    Exit,
     Count
 };
 
 struct Rect {
     int x, y, w, h;
+};
+
+struct Button {
+    int texture_w, texture_h;
+    Sprite *m_texture;
+    Rect button_rect;
 };
 
 class StateMachine {
@@ -27,7 +34,8 @@ public:
     virtual void Init() = 0;
     virtual void Enter() = 0;
     virtual States HandleInput(FRKey k) = 0;
-    virtual bool Tick() = 0;
+    virtual States Tick() = 0;
 protected:
+    // int move_count = 0;
     Snake *m_s;
 };

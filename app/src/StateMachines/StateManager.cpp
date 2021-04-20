@@ -30,5 +30,15 @@ void StateManager::HandleInput(FRKey k) {
 }
 
 bool StateManager::Tick() {
-    return m_States[m_state]->Tick();
+    drawBGColor({0,0,0});
+    States new_state = m_States[m_state]->Tick();
+
+    if (new_state != m_state) {
+        Enter(new_state);
+    }
+
+    if (m_state == Exit)
+        return true;
+    else
+        return false;
 }

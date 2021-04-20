@@ -26,7 +26,7 @@ public:
     virtual void Init() override;
     virtual void Enter() override;
     virtual States HandleInput(FRKey k) override;
-    virtual bool Tick() override;
+    virtual States Tick() override;
 
 private:
     void UpdateLeaderboard(std::istream& file);
@@ -35,9 +35,12 @@ private:
 private:
     std::array<Score, 10> m_Leaders;
     std::filesystem::file_time_type m_last_write_time;
+    int side_padding, top_padding;
 
     const static constexpr int max_name_len = 8;
     const static constexpr int max_score_len = 5;
     const static constexpr int dots_between = 10;
     const static constexpr Color label_color = {50, 132, 0};
+    const static constexpr int text_padding = 10;
+    const static constexpr int text_size = 20;
 };

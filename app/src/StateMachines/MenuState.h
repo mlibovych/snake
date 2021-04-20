@@ -18,12 +18,6 @@ enum e_Buttons {
     CountButton
 };
 
-struct Button {
-    int texture_w, texture_h;
-    Sprite *m_texture;
-    Rect button_rect;
-};
-
 class MenuState: public StateMachine {
 public:
     MenuState(Snake *snake) : StateMachine(snake) {}
@@ -32,7 +26,7 @@ public:
     virtual void Init() override;
     virtual void Enter() override {};
     virtual States HandleInput(FRKey k) override;
-    virtual bool Tick() override;
+    virtual States Tick() override;
 
 private:
     void GenerateButtons();

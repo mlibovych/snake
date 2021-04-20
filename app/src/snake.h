@@ -1,14 +1,20 @@
 #pragma once
 
+#include <memory>
+
 #include "Framework.h"
 #include "StateMachines/StateManager.h"
 
+constexpr int cell_width = 16;
+
 class StateMachine;
+
 
 class Snake : public Framework {
     friend class StateMachine;
 	friend class GameState;
     friend class MenuState;
+    friend class ScoreboardState;
 
 public:
     Snake(int width, int height) noexcept;
@@ -33,7 +39,9 @@ private:
     static constexpr int m_padding = 30, m_menu_height = 100;
 
     std::unique_ptr<StateManager> m_StateManager;
+	
+    int m_width, m_height;
     int m_window_w, m_window_h;
-    int m_playfield_w, m_playfield_height;
+    int m_playfield_w, m_playfield_h;
     bool m_quit = false;
 };

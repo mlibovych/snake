@@ -46,11 +46,17 @@ void ScoreboardState::Enter() {
 }
 
 States ScoreboardState::HandleInput(FRKey k) {
+    if (k == FRKey::ESC || k == FRKey::ENTER)
+        return Menu;
     return Scoreboard;
 }
 
-bool ScoreboardState::Tick() {
-    return false;
+States ScoreboardState::Tick() {
+    for (int i = 0; i < 10; ++i) {
+        drawSprite(m_Leaders[i].m_texture, side_padding,
+                   top_padding + ((m_Leaders[i].tex_h + text_padding) * i));
+    }
+    return Scoreboard;
 }
 
 void ScoreboardState::UpdateLeaderboard(std::istream& file) {
@@ -96,9 +102,13 @@ void ScoreboardState::UpdateLeaderboard(std::istream& file) {
     }
 
     while (i < 10) {
-        m_Leaders[i] = {"........", "....."};
+        m_Leaders[i] = {"........", ".....", nullptr, 0, 0};
         CreateTextTexture(i++);
     }
+
+    side_padding = (m_s->m_window_w - (m_Leaders[0].tex_w + (2 * text_padding))) / 2;;
+    int total_height_of_labels = 10 * (m_Leaders[0].tex_h + (2 * text_padding));
+    top_padding = (m_s->m_window_h - total_height_of_labels) / 2;
 }
 
 void ScoreboardState::CreateTextTexture(int i) {
@@ -111,11 +121,9 @@ void ScoreboardState::CreateTextTexture(int i) {
         line += ' ';
 
     line += score.name;
-    std::cout << max_name_len << " " << score.name.size() << " " << dots_between << " " << std::endl;
     line += std::string(max_name_len - score.name.size() + dots_between, '.');
-
+    line += std::string(max_score_len - score.points.size(), '.');
     line += score.points;
 
-    std::cout << line << " " << line.size() << std::endl;
-    score.m_texture = generateTextTexture(line.c_str(), 20, label_color, &score.tex_w, &score.tex_h);
+    score.m_texture = generateTextTexture(line.c_str(), text_size, label_color, &score.tex_w, &score.tex_h);
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "MenuState.h"
 #include "GameState.h"
 #include "ScoreboardState.h"
